@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uganda News Filter</title>
+  <meta name="description" content="Stories from Uganda's news outlets in one place. Filter by topic, region and outlet, mute what you don't want, and see which stories several outlets are covering.">
+  <link rel="canonical" href="https://realevr.com/news">
+  <meta name="theme-color" content="#0f1412">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/news/news.css">
+</head>
+<body>
+  <a class="skip" href="#feed">Skip to stories</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="logo" href="/news">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Uganda News Filter</span>
+      </a>
+      <div class="top-meta">
+        <span id="updated" class="muted">Loading…</span>
+        <button id="refresh" class="icon-btn" type="button" aria-label="Refresh stories" title="Refresh">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+        </button>
+        <button id="filters-toggle" class="btn-filters" type="button" aria-expanded="false" aria-controls="filters">Filters<span id="filter-count" class="badge" hidden></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside id="filters" class="filters" aria-label="Filters">
+      <div class="filters-head">
+        <h2>Filters</h2>
+        <button id="reset" type="button" class="link-btn">Reset all</button>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Search</span>
+        <input id="q" type="search" placeholder="e.g. Kampala land, URA, Cranes" autocomplete="off">
+      </label>
+
+      <fieldset class="field">
+        <legend class="field-label">Time</legend>
+        <div class="seg" id="time">
+          <button type="button" data-v="24">24h</button>
+          <button type="button" data-v="72">3 days</button>
+          <button type="button" data-v="168">Week</button>
+          <button type="button" data-v="0">All</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field-label">Topics <span class="hint">any of</span></legend>
+        <div class="chips" id="topics"></div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field-label">Regions <span class="hint">any of</span></legend>
+        <div class="chips" id="regions"></div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field-label">Outlets</legend>
+        <ul class="sources" id="sources"></ul>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field-label">Network</legend>
+        <label class="check"><input type="checkbox" id="group"> Group the same story from different outlets</label>
+        <label class="check"><input type="checkbox" id="multi"> Only stories covered by 2+ outlets</label>
+      </fieldset>
+
+      <label class="field">
+        <span class="field-label">Mute words <span class="hint">comma separated</span></span>
+        <input id="mute" type="text" placeholder="e.g. betting, celebrity" autocomplete="off">
+      </label>
+    </aside>
+
+    <main id="feed" class="feed" tabindex="-1">
+      <div class="feed-bar">
+        <p id="count" class="muted" role="status" aria-live="polite"></p>
+        <label class="sort">Sort
+          <select id="sort">
+            <option value="new">Newest first</option>
+            <option value="coverage">Most covered</option>
+          </select>
+        </label>
+      </div>
+      <div id="active" class="active-filters"></div>
+      <ol id="list" class="list"></ol>
+      <div id="empty" class="empty" hidden>
+        <p><strong>No stories match these filters.</strong></p>
+        <p class="muted">Try a wider time window or fewer topics.</p>
+        <button type="button" class="btn" id="empty-reset">Clear filters</button>
+      </div>
+      <button id="more" type="button" class="btn more" hidden>Show more</button>
+      <p class="foot muted">Headlines and summaries come from each outlet's public RSS feed and link to the original article. Topics and regions are tagged automatically by keyword, so some tags will be off.</p>
+    </main>
+  </div>
+
+  <script src="/news/news.js" defer></script>
+</body>
+</html>
